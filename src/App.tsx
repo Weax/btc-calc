@@ -1,25 +1,30 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { useEffect } from "react";
+import { useDispatch } from "react-redux";
+import { startCheckInterval } from "./features/Exchange/slice";
+import Grid from '@material-ui/core/Grid';
+
+import Board from "./features/Board";
 
 function App() {
+  const dispatch = useDispatch();
+
+  //update price indexes
+  useEffect(() => {
+    dispatch(startCheckInterval());
+  }, [dispatch]);
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Grid
+      container
+      spacing={0}
+      alignItems="center"
+      justify="center"
+      style={{ minHeight: "100vh" }}
+    >
+      <Grid item xs={11} style={{ maxWidth: 500 }}>
+        <Board />
+      </Grid>
+    </Grid>
   );
 }
 
