@@ -5,7 +5,7 @@ import { API_URL, UPD_INTERVAL } from "../../config";
 export interface Currency {
     code: string,
     symbol: string,
-    rate: number,
+    rate: string,
     description: string,
     rate_float: number
 }
@@ -30,8 +30,6 @@ export const slice = createSlice({
     reducers: {
         updateBpi: (state, action) => {
             const { bpi, time } = action.payload;
-            // @ts-ignore
-            //state.bpi = Object.entries(bpi).reduce((acc, curr) => {acc.push(curr[1]); return acc}, []);
             state.bpi = bpi;
             state.updated = time.updatedISO;
             state.firstLoading = false;
@@ -45,7 +43,6 @@ export const slice = createSlice({
 export const { updateBpi, setFirstLoading } = slice.actions;
 
 export const startCheckInterval = () =>  (dispatch: StoreDispatch) => {
-    console.log('startCheckInterval dispatched')
     dispatch(checkApi());
     dispatch(setFirstLoading(true));
 
@@ -58,7 +55,7 @@ export const stopCheckInterval = () => {
     clearInterval(interval);
 };
 
-const checkApi = () => async (dispatch: StoreDispatch) => {
+export const checkApi = () => async (dispatch: StoreDispatch) => {
     const response = await fetch(API_URL);
     const json = await response.json();
     dispatch(updateBpi(json));

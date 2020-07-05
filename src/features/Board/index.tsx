@@ -26,12 +26,11 @@ import {
   IconButton,
   Menu,
   MenuItem,
+  CircularProgress
 } from "@material-ui/core";
-import HighlightOffIcon from "@material-ui/icons/HighlightOff";
 import { grey } from "@material-ui/core/colors";
-
-import CircularProgress from "@material-ui/core/CircularProgress";
 import { makeStyles, Theme, createStyles } from "@material-ui/core/styles";
+import HighlightOffIcon from "@material-ui/icons/HighlightOff";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({

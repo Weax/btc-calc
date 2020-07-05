@@ -1,13 +1,12 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { RootState } from "../../store/store";
-import { Currency} from "../Exchange/slice"
 
 interface BoardState {
     btcInput: string,
     ddCurrencyCodes: string[],
 }
 
-const initialState: BoardState = {
+export const initialState: BoardState = {
     btcInput: "1",
     ddCurrencyCodes: [],
 }
@@ -32,7 +31,7 @@ export const { setBtcInputValue, addToDropdown, removeFromDropdown } = slice.act
 
 export const selectActiveCurrencies = (state: RootState) => {
     const bpi = state.exchange.bpi;
-    const bpiArray:Currency[] = Object.values(bpi);
+    const bpiArray = Object.values(bpi);
     const dd = state.board.ddCurrencyCodes;
     return bpiArray.filter(curr => !dd.some(code => code === curr.code));
 }
