@@ -1,4 +1,4 @@
-# BTC rates caltulator
+# BTC rates calculator
 Bitcoin price index updated every minute using Coindesk API
 
 ## Available Scripts
